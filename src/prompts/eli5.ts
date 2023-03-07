@@ -1,4 +1,4 @@
-import { ParsedResponse, PromptConfiguration } from "../types";
+import { ParsedResponse, PromptConfiguration } from "../types.js";
 
 const promptConfiguration: PromptConfiguration = {
   createPrompt(input: string) {

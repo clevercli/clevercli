@@ -15,7 +15,8 @@
     "clean": "npm run build -- --clean",
     "build": "tsc --build",
     "start": "node build/bin/server.js",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=14.16"

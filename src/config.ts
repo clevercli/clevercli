@@ -1,5 +1,5 @@
-import { ConfigError } from "./errors";
-import { Config } from "./types";
+import { ConfigError } from "./errors.js";
+import { Config } from "./types.js";
 
 function getEnvOrThrow(key: string) {
   const val = process.env[key];

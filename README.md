@@ -21,4 +21,5 @@ clevercli eli5 "why is the sky blue?"
 ## TODO
 
 - Implement a cache.
+- Streaming API.
 - Support older Node.js versions?

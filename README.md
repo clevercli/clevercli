@@ -43,8 +43,11 @@ const promptConfiguration: PromptConfiguration = {
 export default promptConfiguration;
 ```
 
+## Cache
+
+Query results are cached on your filesystem's cache directory.
+
 ## TODO
 
-- Implement a cache.
 - Streaming API.
-- Support older Node.js versions?
+- Support older Node.js vesions?

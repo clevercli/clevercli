@@ -2,6 +2,7 @@ import { executePrompt } from "./executePrompt.js";
 import { loadConfig } from "./config.js";
 import { loadPromptConfig } from "./loadPromptConfig.js";
 import { APPNAME } from "./types.js";
+import FileSystemKVS from "./kvs/kvs-filesystem.js";
 
 function parseArgs(argv: string[]) {
   const [_nodeBin, _jsFile, promptId, ...rest] = argv;
@@ -24,8 +25,9 @@ export async function cli() {
     printUsageAndExit();
   }
   const config = loadConfig();
-  const promptConfig = await loadPromptConfig(promptId);
-  const { message } = await executePrompt(promptConfig, input, config);
+  const promptConfig = await loadPromptConfig(promptId, config);
+  const cache = new FileSystemKVS({ baseDir: config.paths.cache });
+  const { message } = await executePrompt(promptConfig, input, config, cache);
   console.log(message);
 }
 

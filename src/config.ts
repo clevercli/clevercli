@@ -1,5 +1,6 @@
 import { ConfigError } from "./errors.js";
-import { Config } from "./types.js";
+import { APPNAME, Config } from "./types.js";
+import envPaths from "env-paths";
 
 function getEnvOrThrow(key: string) {
   const val = process.env[key];
@@ -16,5 +17,7 @@ export function loadConfig(): Config {
     openai: {
       apiKey: getEnvOrThrow("OPENAI_API_KEY"),
     },
+    paths: envPaths(APPNAME, { suffix: "" }),
+    useCache: true,
   };
 }

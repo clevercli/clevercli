@@ -1,16 +1,7 @@
 import { executePrompt } from "./executePrompt.js";
 import { loadConfig } from "./config.js"
 import { ConfigError } from "./errors.js";
-
-function getEnvOrThrow() {
-  
-}
-
-async function loadPromptConfig(promptId: string) {
-  const promptConfig = await import(`./prompts/${promptId}.js`)
-  // TODO: validate promptConfig?
-  return promptConfig.default;
-}
+import { loadPromptConfig } from "./loadPromptConfig.js"
 
 function parseArgs(argv: string[]) {
   const [_nodeBin, _jsFile, promptId, ...rest] = argv;

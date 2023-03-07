@@ -7,7 +7,7 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "clevercli": "./build/bin/cli.js"
+    "clevercli": "./dist/bin/cli.js"
   },
   "scripts": {
     "type-check": "tsc --noEmit",

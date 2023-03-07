@@ -1,19 +1,19 @@
 export const APPNAME = "clevercli";
 
 export interface ParsedResponse {
-  message: string,
-  meta?: object
+  message: string;
+  meta?: object;
 }
 
 export enum ModelType {
   Chat,
-  Completion
+  Completion,
 }
 
 export interface Model {
-  id: string,
-  type: ModelType,
-  maxTokens: number
+  id: string;
+  type: ModelType;
+  maxTokens: number;
 }
 
 export interface PromptConfiguration {
@@ -24,6 +24,6 @@ export interface PromptConfiguration {
 
 export interface Config {
   openai: {
-    apiKey: string
-  }
+    apiKey: string;
+  };
 }

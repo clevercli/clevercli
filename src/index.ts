@@ -1,20 +1,19 @@
 import { executePrompt } from "./executePrompt.js";
-import { loadConfig } from "./config.js"
-import { ConfigError } from "./errors.js";
-import { loadPromptConfig } from "./loadPromptConfig.js"
-import { APPNAME } from "./types.js"
+import { loadConfig } from "./config.js";
+import { loadPromptConfig } from "./loadPromptConfig.js";
+import { APPNAME } from "./types.js";
 
 function parseArgs(argv: string[]) {
   const [_nodeBin, _jsFile, promptId, ...rest] = argv;
   const input = rest.join(" ");
-  return { promptId, input }
+  return { promptId, input };
 }
 
 function printUsageAndExit() {
-  console.log(`Usage: ${APPNAME} <promptType> <input>`)
-  console.log("")
+  console.log(`Usage: ${APPNAME} <promptType> <input>`);
+  console.log("");
   console.log("Example: ");
-  console.log("")
+  console.log("");
   console.log(`$ ${APPNAME} eli5 "what are large language models?"`);
   process.exit(1);
 }

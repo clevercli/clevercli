@@ -18,6 +18,14 @@ clevercli <prompt_type> <prompt>
 clevercli eli5 "why is the sky blue?"
 ```
 
+## Adding a prompt
+
+1. Fork the repository.
+
+2. Create a new prompt configuration in [./src/prompts/](./src/prompts/). You can use the [eli5](./src/prompts/eli5.ts) prompt configuration as a base.
+
+3. Send a pull request!
+
 ## TODO
 
 - Implement a cache.

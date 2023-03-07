@@ -1,0 +1,35 @@
+{
+  "name": "aicli",
+  "description": "",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "aicli": "./build/bin/cli.js"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "vitest src/",
+    "clean": "npm run build -- --clean",
+    "build": "tsc --build",
+    "start": "node build/bin/server.js",
+    "prettier": "prettier --write ."
+  },
+  "engines": {
+    "node": ">=14.16"
+  },
+  "author": "Olivier Lalonde <olalonde@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "prettier": "2.8.4",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.29.1"
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
+  }
+}

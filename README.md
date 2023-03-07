@@ -1,21 +1,21 @@
-# aicli
+# clevercli
 
-aicli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
+clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
 ```console
-npm install -g aicli
+npm install -g clevercli
 ```
 
 ## Usage
 
 ```console
-aicli <prompt_type> <prompt>
+clevercli <prompt_type> <prompt>
 ```
 
 ## Example
 
 ```console
-aicli eli5 "why is the sky blue?"
+clevercli eli5 "why is the sky blue?"
 ```
 
 ## TODO

@@ -1,13 +1,13 @@
 {
-  "name": "aicli",
-  "description": "aicli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.",
+  "name": "clevercli",
+  "description": "clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "aicli": "./build/bin/cli.js"
+    "clevercli": "./build/bin/cli.js"
   },
   "scripts": {
     "type-check": "tsc --noEmit",

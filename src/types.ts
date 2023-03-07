@@ -1,3 +1,5 @@
+export const APPNAME = "clevercli";
+
 export interface ParsedResponse {
   message: string,
   meta?: object

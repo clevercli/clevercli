@@ -2,6 +2,7 @@ import { executePrompt } from "./executePrompt.js";
 import { loadConfig } from "./config.js"
 import { ConfigError } from "./errors.js";
 import { loadPromptConfig } from "./loadPromptConfig.js"
+import { APPNAME } from "./types.js"
 
 function parseArgs(argv: string[]) {
   const [_nodeBin, _jsFile, promptId, ...rest] = argv;
@@ -10,11 +11,11 @@ function parseArgs(argv: string[]) {
 }
 
 function printUsageAndExit() {
-  console.log("Usage: aicli <promptType> <input>")
+  console.log(`Usage: ${APPNAME} <promptType> <input>`)
   console.log("")
   console.log("Example: ");
   console.log("")
-  console.log(`$ aicli eli5 "what are large language models?"`);
+  console.log(`$ ${APPNAME} eli5 "what are large language models?"`);
   process.exit(1);
 }
 

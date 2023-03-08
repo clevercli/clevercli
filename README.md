@@ -4,6 +4,18 @@
 
 **clevercli** is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
+Some examples:
+
+```console
+$ bash -c $(clevercli unix-command "list all .md files")
+$ clevercli eli5 "why is the sky blue?"
+$ man du | clevercli summarize
+$ clevercli convert-to-rust < index.tx > main.rs
+$ clevercli ask "in node.js, how to check if stdin is open?"
+```
+
+## Install
+
 ```console
 $ npm install -g @clevercli/cli
 ```
@@ -91,6 +103,10 @@ Example: `clevercli convert-to-rust < index.ts > main.rs`
 - **convert-to-typescript**: Converts file to TypeScript
 
 Example: `clevercli convert-to-typescript < index.js > main.ts`
+
+- **unix-command**: Outputs a UNIX command based on the input description.
+
+Example: `bash -c $(clevercli unix-command "list all .md files")`
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 

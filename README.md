@@ -61,6 +61,10 @@ Example: `clevercli joke "yo mamma"`
 
 Example: `clevercli refactor < index.ts`
 
+- **poem**: Asks ChatGPT to write a small poem on the topic.
+
+Example: `clevercli poem "hacker news"`
+
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 See [Adding a built-in prompt](#adding-a-built-in-prompt) for adding an official prompt.
@@ -130,3 +134,4 @@ DEBUG="clevercli:*" clevercli eli5 "friendship"
 - [ ] GH workflow + tests
 - [ ] Support older Node.js versions?
 - [ ] Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)
+- [ ] Distributed cache (not just local)

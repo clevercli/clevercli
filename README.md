@@ -126,6 +126,7 @@ DEBUG="clevercli:*" clevercli eli5 "friendship"
 ## TODO
 
 - [x] Streaming API.
+- [ ] More CLI commands and options (e.g. list available prompts)
 - [ ] GH workflow + tests
 - [ ] Support older Node.js versions?
 - [ ] Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)

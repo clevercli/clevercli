@@ -6,6 +6,7 @@ Some examples:
 
 ```console
 $ $(clevercli unix-command "undo the last commit")
+$ clevercli unix-command "add a collaborator to a npm package"
 $ clevercli eli5 "why is the sky blue?"
 $ man du | clevercli summarize
 $ clevercli convert-to-rust < index.ts > main.rs

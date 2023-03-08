@@ -63,51 +63,51 @@ $ clevercli ask "in node.js, how to check if stdin is open?" | glow
 
 ## Built-in prompts
 
-- **ask**: Just passes through the input directly to ChatGPT.
+- [ask](./src/prompts/ask.ts) Just passes through the input directly to ChatGPT.
 
 Example: `clevercli ask "in node.js, how to check if stdin is open?"`
 
-- **eli5**: Explain Me Like I'm 5.
+- [eli5](./src/prompts/eli5.ts): Explain Me Like I'm 5.
 
 Example: `clevercli eli5 "why is the sky blue?"`
 
-- **joke**: Tells a joke about the topic.
+- [joke](./src/prompts/joke.ts): Tells a joke about the topic.
 
 Example: `clevercli joke "git being difficult to learn"`
 
-- **refactor**: Asks ChatGPT to refactor code in a file.
+- [refactor](./src/prompts/refactor.ts): Asks ChatGPT to refactor code in a file.
 
 Example: `clevercli refactor < index.ts`
 
-- **poem**: Asks ChatGPT to write a small poem on the topic.
+- [poem](./src/prompts/poem.ts): Asks ChatGPT to write a small poem on the topic.
 
 Example: `clevercli poem "hacker news"`
 
-- **recipe**: Outputs recipe suggestions given a list of available ingredients.
+- [recipe](./src/prompts/recipe.ts): Outputs recipe suggestions given a list of available ingredients.
 
 Example: `clevercli recipe "ham, cheese, bread"`
 
-- **summarize**: Outputs a short summary of the text.
+- [summarize](./src/prompts/summarize.ts) Outputs a short summary of the text.
 
 Example: `clevercli summarize < README.md`
 
-- **synonyms**: List synonyms for the input words.
+- [synonyms](./src/prompts/synonyms.ts): List synonyms for the input words.
 
 Example: `clevercli synonyms "cat"`
 
-- **convert-to-rust**: Converts file to Rust
+- [convert-to-rust](./src/prompts/convert-to-rust.ts): Converts file to Rust
 
 Example: `clevercli convert-to-rust < index.ts > main.rs`
 
-- **convert-to-typescript**: Converts file to TypeScript
+- [convert-to-typescript](./src/prompts/convert-to-typescript.ts): Converts file to TypeScript
 
 Example: `clevercli convert-to-typescript < index.js > main.ts`
 
-- **unix-command**: Outputs a UNIX command based on the input description.
+- [unix-command](./src/prompts/unix-command.ts): Outputs a UNIX command based on the input description.
 
 Example: `bash -c $(clevercli unix-command "list all .md files")`
 
--- **regex**: Outputs a JavaScript-compatible RegEx that matches the input examples.
+- [regex](./src/prompts/regex.ts): Outputs a JavaScript-compatible RegEx that matches the input examples.
 
 Example `clevercli regex "http://google.com https://news.ycombinator.com/some/path"`
 

@@ -10,7 +10,7 @@ Some examples:
 $ bash -c $(clevercli unix-command "list all .md files")
 $ clevercli eli5 "why is the sky blue?"
 $ man du | clevercli summarize
-$ clevercli convert-to-rust < index.tx > main.rs
+$ clevercli convert-to-rust < index.ts > main.rs
 $ clevercli ask "in node.js, how to check if stdin is open?"
 ```
 

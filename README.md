@@ -1,7 +1,5 @@
 # clevercli
 
-![deverloper-joke-example](./images/developer-joke.gif)
-
 **clevercli** is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
 Some examples:

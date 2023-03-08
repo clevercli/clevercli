@@ -87,3 +87,4 @@ Query results are cached on your filesystem's cache directory.
 - Streaming API.
 - GH workflow + tests
 - Support older Node.js versions?
+- Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)

@@ -28,7 +28,9 @@ export async function cli() {
     }
     const config = loadConfig();
     const promptConfig = await loadPromptConfig(promptId, config);
-    const cache = new FileSystemKVS({ baseDir: config.paths.cache });
+    const cache = config.useCache
+      ? new FileSystemKVS({ baseDir: config.paths.cache })
+      : undefined;
     const { message } = await executePrompt(promptConfig, input, config, cache);
     console.log(message);
   } catch (err) {

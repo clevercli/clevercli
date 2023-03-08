@@ -12,6 +12,8 @@ npm install -g @clevercli/cli
 clevercli <prompt_type> <prompt>
 ```
 
+See `./src/prompts/` for a list of available prompts.
+
 ## Example
 
 ```console
@@ -19,6 +21,33 @@ clevercli eli5 "why is the sky blue?"
 ```
 
 ## Adding a prompt
+
+Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the PromptConfiguration interface.
+
+```typescript
+export interface PromptConfiguration {
+  createPrompt(input: string): string;
+  parseResponse?(response: string, input: string): ParsedResponse;
+  model?: string;
+}
+```
+
+For example:
+
+```javascript
+// eli5.mjs
+export default {
+  createPrompt(input) {
+    return `Provide a very detailed explanation but like I am 5 years old (ELI5) on this topic: ${input}.\n###\n`;
+  },
+  // Note: this is the default parseResponse and can therefore be ommitted
+  // parseResponse(response, _input) {
+  //     return { message: response };
+  // },
+};
+```
+
+## Adding a builtin prompt
 
 1. Fork the repository.
 

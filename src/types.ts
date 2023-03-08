@@ -29,9 +29,6 @@ export interface Config {
   useCache: boolean;
   paths: {
     data: string;
-    config: string;
     cache: string;
-    log: string;
-    temp: string;
   };
 }

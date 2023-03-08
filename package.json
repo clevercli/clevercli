@@ -3,7 +3,8 @@
   "description": "clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.",
   "private": false,
   "version": "0.0.7",
-  "main": "./dist/index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
     "clevercli": "./dist/bin/cli.js"
@@ -23,7 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=14.16"
   },
   "author": "Olivier Lalonde <olalonde@gmail.com>",
   "license": "MIT",

@@ -22,8 +22,6 @@ $ echo "<prompt_input>" | clevercli <prompt_type>
 
 Requires `export OPENAI_API_KEY="<your OpenAI api key>"` to be set (e.g. in your `~/.bashrc`).
 
-Requires Node v16+
-
 ## Example
 
 ```console

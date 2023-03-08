@@ -1,4 +1,4 @@
-import { executePrompt } from "./executePrompt.js";
+import { executePrompt, executePromptStream } from "./executePrompt.js";
 import { loadConfig } from "./config.js";
 import { loadPromptConfig } from "./loadPromptConfig.js";
 import { APPNAME } from "./types.js";
@@ -31,8 +31,11 @@ export async function cli() {
     const cache = config.useCache
       ? new FileSystemKVS({ baseDir: config.paths.cache })
       : undefined;
-    const { message } = await executePrompt(promptConfig, input, config, cache);
-    console.log(message);
+    const stream = executePromptStream(promptConfig, input, config, cache);
+    for await (const chunk of stream) {
+      process.stdout.write(chunk);
+    }
+    process.stdout.write("\n");
   } catch (err) {
     if (err instanceof AppError) {
       console.error(err.toString());

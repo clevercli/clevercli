@@ -82,9 +82,15 @@ export default promptConfiguration;
 
 Query results are cached on your filesystem's cache directory.
 
+## Debugging
+
+```
+DEBUG="clevercli:*" clevercli eli5 "friendship"
+```
+
 ## TODO
 
-- Streaming API.
-- GH workflow + tests
-- Support older Node.js versions?
-- Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)
+- [x] Streaming API.
+- [ ] GH workflow + tests
+- [ ] Support older Node.js versions?
+- [ ] Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)

@@ -36,6 +36,7 @@
     "vitest": "^0.29.1"
   },
   "dependencies": {
+    "debug": "^4.3.4",
     "env-paths": "^3.0.0",
     "mkdirp": "^2.1.5",
     "openai": "^3.2.1"

@@ -3,6 +3,9 @@ import { APPNAME, Config } from "./types.js";
 import envPaths from "env-paths";
 import { homedir } from "node:os";
 import { join as pathJoin } from "node:path";
+import createDebug from "debug";
+
+const debug = createDebug(`${APPNAME}:config`);
 
 function getEnvOrThrow(key: string) {
   const val = process.env[key];
@@ -17,7 +20,7 @@ function getEnvOrThrow(key: string) {
 const paths = envPaths(APPNAME, { suffix: "" });
 
 export function loadConfig(): Config {
-  return {
+  const config = {
     openai: {
       apiKey: getEnvOrThrow("OPENAI_API_KEY"),
     },
@@ -27,4 +30,6 @@ export function loadConfig(): Config {
     },
     useCache: true,
   };
+  debug(config);
+  return config;
 }

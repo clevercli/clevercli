@@ -5,19 +5,16 @@ import {
 } from "openai";
 import models, { defaultModel } from "./openaiModels.js";
 import { ApiError, AppError } from "./errors.js";
-import { Config, ParsedResponse, PromptConfiguration } from "./types.js";
+import { Config, Model, ParsedResponse, PromptConfiguration } from "./types.js";
 import KeyValueStore from "./kvs/abstract.js";
+import { openAIQuery } from "./openai.js";
+import { asyncIterableToArray } from "./utils.js";
 
 function defaultParseResponse(content: string, _input: string): ParsedResponse {
   return { message: content };
 }
 
-export async function executePrompt(
-  promptConfig: PromptConfiguration,
-  input: string,
-  config: Config,
-  cache?: KeyValueStore<string, string>
-): Promise<ParsedResponse> {
+function toModel(promptConfig: PromptConfiguration): Model {
   const model = promptConfig.model
     ? models.get(promptConfig.model)
     : defaultModel;
@@ -26,46 +23,52 @@ export async function executePrompt(
       message: `Could not find model "${promptConfig.model}"`,
     });
   }
+  return model;
+}
 
+export async function* executePromptStream(
+  promptConfig: PromptConfiguration,
+  input: string,
+  config: Config,
+  cache?: KeyValueStore<string, string>
+): AsyncGenerator<string> {
+  const model = toModel(promptConfig);
   const formattedPrompt = promptConfig.createPrompt(input);
+  const cacheKey = `${model.id}-${formattedPrompt}`;
 
-  const openai = new OpenAIApi(
-    new OpenAIConfiguration({
-      apiKey: config.openai.apiKey,
-    })
-  );
+  if (cache) {
+    const cachedResponse = await cache.get(cacheKey);
+    if (cachedResponse) {
+      yield cachedResponse;
+      return;
+    }
+  }
+  const stream = openAIQuery(model, formattedPrompt, config);
+  const chunks = [];
+  for await (const chunk of stream) {
+    chunks.push(chunk);
+    yield chunk;
+  }
+  if (cache) {
+    const response = chunks.join("");
+    await cache.set(cacheKey, response);
+  }
+}
 
-  const response = await (async () => {
-    const cacheKey = `${model.id}-${formattedPrompt}`;
-    if (cache) {
-      const cachedValue = await cache.get(cacheKey);
-      if (cachedValue) {
-        return JSON.parse(cachedValue);
-      }
-    }
-    const opts = {
-      model: model.id,
-      messages: [
-        {
-          role: ChatCompletionRequestMessageRoleEnum.System,
-          content: formattedPrompt,
-        },
-      ],
-    };
-    const completion = await openai.createChatCompletion(opts);
-    const choices = completion.data.choices;
-    const content = choices[0].message?.content;
-    if (!content) {
-      throw new ApiError({ message: "No content returned by API." });
-    }
-    const parseResponse = promptConfig.parseResponse ?? defaultParseResponse;
-    const response = parseResponse(content, input);
-    if (cache) {
-      await cache.set(cacheKey, JSON.stringify(response));
-    }
-    return response;
-  })();
-  return response;
+export async function executePrompt(
+  promptConfig: PromptConfiguration,
+  input: string,
+  config: Config,
+  cache?: KeyValueStore<string, string>
+): Promise<ParsedResponse> {
+  const model = toModel(promptConfig);
+  const parseResponse = promptConfig.parseResponse ?? defaultParseResponse;
+  const response = (
+    await asyncIterableToArray(
+      executePromptStream(promptConfig, input, config, cache)
+    )
+  ).join("");
+  return parseResponse(response, input);
 }
 
 export default executePrompt;

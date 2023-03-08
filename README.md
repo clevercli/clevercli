@@ -85,4 +85,5 @@ Query results are cached on your filesystem's cache directory.
 ## TODO
 
 - Streaming API.
+- GH workflow + tests
 - Support older Node.js versions?

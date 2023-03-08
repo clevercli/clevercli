@@ -107,6 +107,10 @@ Example: `clevercli convert-to-typescript < index.js > main.ts`
 
 Example: `bash -c $(clevercli unix-command "list all .md files")`
 
+-- **regex**: Outputs a JavaScript-compatible RegEx that matches the input examples.
+
+Example `clevercli regex "http://google.com https://news.ycombinator.com/some/path"`
+
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 See [Adding a built-in prompt](#adding-a-built-in-prompt) for adding an official prompt.

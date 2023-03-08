@@ -30,7 +30,7 @@ $ clevercli --list
 
 Requires an [OpenAI API key](https://platform.openai.com/account/api-keys). Add `export OPENAI_API_KEY="<your OpenAI api key>"` to your shell script (e.g. `~/.bashrc`).
 
-## Example
+## Examples
 
 ```console
 $ clevercli joke "banana"
@@ -39,6 +39,10 @@ Why did the banana go to the doctor? Because it wasn't peeling well!
 
 ```console
 $ echo "what is stdin?" | clevercli eli5
+```
+
+```console
+$ man du | clevercli summarize
 ```
 
 Tip: since many answers use markdown, you can pipe to [glow](https://github.com/charmbracelet/glow) to get a nicer rendering:

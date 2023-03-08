@@ -5,7 +5,7 @@
 Some examples:
 
 ```console
-$ bash -c $(clevercli unix-command "list all .md files")
+$ $(clevercli unix-command "undo the last commit")
 $ clevercli eli5 "why is the sky blue?"
 $ man du | clevercli summarize
 $ clevercli convert-to-rust < index.ts > main.rs

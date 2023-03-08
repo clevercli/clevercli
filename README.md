@@ -79,10 +79,6 @@ export default {
   createPrompt(input) {
     return `Provide a very detailed explanation but like I am 5 years old (ELI5) on this topic: ${input}.\n###\n`;
   },
-  // Note: this is the default parseResponse and can therefore be ommitted
-  // parseResponse(response, _input) {
-  //     return { message: response };
-  // },
 };
 ```
 

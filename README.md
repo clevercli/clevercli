@@ -21,8 +21,8 @@ Why did the banana go to the doctor? Because it wasn't peeling well!
 
 ## Built-in prompts
 
-- eli5
-- joke
+- eli5: Explain Me Like I'm 5
+- joke: tells a joke about the topic
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 

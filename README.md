@@ -8,6 +8,8 @@
 $ npm install -g @clevercli/cli
 ```
 
+Requires Node v16+.
+
 ## Usage
 
 ```console

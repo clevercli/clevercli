@@ -24,7 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "engines": {
-    "node": ">=14.16"
+    "node": ">=16"
   },
   "author": "Olivier Lalonde <olalonde@gmail.com>",
   "license": "MIT",

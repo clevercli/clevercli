@@ -12,6 +12,7 @@ function isProgrammingError(err: unknown) {
 }
 
 export class AppError extends Error {
+  cause?: Error;
   exitCode = 1;
 
   private static wrap(err: unknown) {
@@ -45,7 +46,8 @@ export class AppError extends Error {
   }
 
   constructor(opts?: { message?: string; cause?: Error }) {
-    super(opts?.message, { cause: opts?.cause });
+    super(opts?.message);
+    this.cause = opts?.cause;
   }
 }
 

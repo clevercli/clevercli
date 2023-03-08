@@ -6,10 +6,20 @@ import { dirname, parse } from "node:path";
 import { readdir } from "node:fs/promises";
 
 async function readFilesInDirectory(path: string) {
-  const files = await readdir(path);
-  return files
-    .filter((f) => f.endsWith(".js") || f.endsWith(".mjs"))
-    .map((filename) => pathJoin(path, filename));
+  try {
+    const files = await readdir(path);
+    return files
+      .filter((f) => f.endsWith(".js") || f.endsWith(".mjs"))
+      .map((filename) => pathJoin(path, filename));
+  } catch (err) {
+    if (err instanceof Error && "code" in err) {
+      if (err.code == "ENOENT") {
+        // ignore error: ENOENT: no such file or directory
+        return [];
+      }
+    }
+    throw err;
+  }
 }
 
 // Returns a path relative to import.meta.filename

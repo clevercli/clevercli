@@ -35,14 +35,11 @@ Requires an [OpenAI API key](https://platform.openai.com/account/api-keys). Add 
 ```console
 $ clevercli joke "banana"
 Why did the banana go to the doctor? Because it wasn't peeling well!
-```
-
-```console
 $ echo "what is stdin?" | clevercli eli5
-```
-
-```console
+...
 $ man du | clevercli summarize
+...
+$ clevercli convert-to-rust < index.ts > main.rs
 ```
 
 Tip: since many answers use markdown, you can pipe to [glow](https://github.com/charmbracelet/glow) to get a nicer rendering:
@@ -86,6 +83,14 @@ Example: `clevercli summarize < README.md`
 - **synonyms**: List synonyms for the input words.
 
 Example: `clevercli synonyms "cat"`
+
+- **convert-to-rust**: Converts file to Rust
+
+Example: `clevercli convert-to-rust < index.ts > main.rs`
+
+- **convert-to-typescript**: Converts file to TypeScript
+
+Example: `clevercli convert-to-typescript < index.js > main.ts`
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 

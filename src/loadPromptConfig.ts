@@ -2,7 +2,15 @@ import { Config } from "./types.js";
 import { join as pathJoin } from "node:path";
 import { AppError } from "./errors.js";
 import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
+import { dirname, parse } from "node:path";
+import { readdir } from "node:fs/promises";
+
+async function readFilesInDirectory(path: string) {
+  const files = await readdir(path);
+  return files
+    .filter((f) => f.endsWith(".js") || f.endsWith(".mjs") || f.endsWith(".ts"))
+    .map((filename) => pathJoin(path, filename));
+}
 
 // Returns a path relative to import.meta.filename
 export function sourceRelativePath(
@@ -13,7 +21,7 @@ export function sourceRelativePath(
   return pathJoin(__dirname, ...relPaths);
 }
 
-export async function loadFromBaseDir(promptId: string, path: string) {
+export async function loadFromPath(path: string) {
   const promptConfig = await import(path);
   // TODO: validate promptConfig?
   return promptConfig.default;
@@ -22,11 +30,8 @@ export async function loadFromBaseDir(promptId: string, path: string) {
 export async function loadPromptConfig(promptId: string, config: Config) {
   try {
     const promptConfig = await Promise.any([
-      loadFromBaseDir(
-        promptId,
-        sourceRelativePath(import.meta, `./prompts/${promptId}.js`)
-      ),
-      loadFromBaseDir(promptId, pathJoin(config.paths.data, `${promptId}.mjs`)),
+      loadFromPath(sourceRelativePath(import.meta, `./prompts/${promptId}.js`)),
+      loadFromPath(pathJoin(config.paths.data, `${promptId}.mjs`)),
     ]);
     return promptConfig;
   } catch (err) {
@@ -34,4 +39,23 @@ export async function loadPromptConfig(promptId: string, config: Config) {
       message: `Could not find prompt ${promptId}. Are you sure it is a builtin prompt or that ${config.paths.data}/${promptId}.mjs exists?`,
     });
   }
+}
+
+export async function listPrompts(config: Config) {
+  const [localFiles, builtinFiles] = await Promise.all(
+    [
+      sourceRelativePath(import.meta, `./prompts`),
+      pathJoin(config.paths.data),
+    ].map(readFilesInDirectory)
+  );
+  const allFiles = [...localFiles, ...builtinFiles];
+  const allPromptConfigs = await Promise.all(allFiles.map(loadFromPath));
+
+  return allPromptConfigs.map((config, i) => {
+    const name = parse(allFiles[i]).name;
+    return {
+      name,
+      description: config.description,
+    };
+  });
 }

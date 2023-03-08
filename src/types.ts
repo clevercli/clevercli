@@ -20,6 +20,7 @@ export interface PromptConfiguration {
   createPrompt(input: string): string;
   parseResponse?(response: string, input: string): ParsedResponse;
   model?: string;
+  description?: string;
 }
 
 export interface Config {

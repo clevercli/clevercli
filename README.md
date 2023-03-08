@@ -22,6 +22,12 @@ Or using `stdin`:
 $ echo "<prompt_input>" | clevercli <prompt_type>
 ```
 
+List available prompt types:
+
+```
+$ clevercli --list
+```
+
 Requires an [OpenAI API key](https://platform.openai.com/account/api-keys). Add `export OPENAI_API_KEY="<your OpenAI api key>"` to your shell script (e.g. `~/.bashrc`).
 
 ## Example
@@ -84,8 +90,8 @@ Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that foll
 ```typescript
 export interface PromptConfiguration {
   createPrompt(input: string): string;
-  parseResponse?(response: string, input: string): ParsedResponse;
   model?: string;
+  description?: string;
 }
 ```
 
@@ -138,7 +144,7 @@ DEBUG="clevercli:*" clevercli eli5 "friendship"
 ## TODO
 
 - [x] Streaming API.
-- [ ] More CLI commands and options (e.g. list available prompts)
+- [ ] Proper CLI arg parsing and options
 - [ ] GH workflow + tests
 - [ ] Support older Node.js versions?
 - [ ] Interactively prompt OpenAI API key and save to filesystem (when OPENAPI_KEY is not set)

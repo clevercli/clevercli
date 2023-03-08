@@ -1,6 +1,6 @@
 import { executePrompt, executePromptStream } from "./executePrompt.js";
 import { loadConfig } from "./config.js";
-import { loadPromptConfig } from "./loadPromptConfig.js";
+import { loadPromptConfig, listPrompts } from "./loadPromptConfig.js";
 import { APPNAME } from "./types.js";
 import FileSystemKVS from "./kvs/kvs-filesystem.js";
 import { AppError } from "./errors.js";
@@ -13,7 +13,9 @@ function parseArgs(argv: string[]) {
 }
 
 function printUsageAndExit() {
-  console.log(`Usage: ${APPNAME} <promptType> <input>`);
+  console.log("Usage:");
+  console.log(`$ ${APPNAME} <promptType> <input>`);
+  console.log(`$ ${APPNAME} --list`);
   console.log("");
   console.log("Example: ");
   console.log("");
@@ -33,12 +35,26 @@ function getInput(argvInput: string) {
 
 export async function cli() {
   try {
+    const config = loadConfig();
     const { promptId, input: argvInput } = parseArgs(process.argv);
+    if (promptId === "--list") {
+      const prompts = await listPrompts(config);
+      console.log(
+        prompts
+          .map((p) => {
+            const description = p.description ? `: ${p.description}` : "";
+            return `${p.name}${description}`;
+          })
+          .join("\n")
+      );
+      return;
+    } else if (promptId.startsWith("--")) {
+      printUsageAndExit();
+    }
     const input = getInput(argvInput);
     if (!promptId || !input) {
       printUsageAndExit();
     }
-    const config = loadConfig();
     const promptConfig = await loadPromptConfig(promptId, config);
     const cache = config.useCache
       ? new FileSystemKVS({ baseDir: config.paths.cache })

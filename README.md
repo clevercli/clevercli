@@ -73,7 +73,7 @@ Example: `clevercli eli5 "why is the sky blue?"`
 
 - **joke**: Tells a joke about the topic.
 
-Example: `clevercli joke "yo mamma"`
+Example: `clevercli joke "git being difficult to learn"`
 
 - **refactor**: Asks ChatGPT to refactor code in a file.
 

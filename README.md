@@ -3,13 +3,13 @@
 clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
 ```console
-npm install -g @clevercli/cli
+$ npm install -g @clevercli/cli
 ```
 
 ## Usage
 
 ```console
-clevercli <prompt_type> <prompt>
+$ clevercli <prompt_type> <prompt>
 ```
 
 ## Example

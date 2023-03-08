@@ -13,6 +13,7 @@ function isProgrammingError(err: unknown) {
 
 export class AppError extends Error {
   exitCode = 1;
+  cause?: Error;
 
   private static wrap(err: unknown) {
     // We don't wrap errors that indicate unexpected/programming errors
@@ -38,14 +39,15 @@ export class AppError extends Error {
   toString(): string | this {
     const printCause = this.cause
       ? () => {
-          return `(cause: ${this.cause})`;
+          return ` (Cause: ${this.cause})`;
         }
       : () => "";
     return `${this.name}: ${this.message}${printCause()}`;
   }
 
   constructor(opts?: { message?: string; cause?: Error }) {
-    super(opts?.message, { cause: opts?.cause });
+    super(opts?.message);
+    this.cause = opts?.cause;
   }
 }
 

@@ -22,7 +22,7 @@ Or using `stdin`:
 $ echo "<prompt_input>" | clevercli <prompt_type>
 ```
 
-Requires `export OPENAI_API_KEY="<your OpenAI api key>"` to be set (e.g. in your `~/.bashrc`).
+Requires an [OpenAI API key](https://platform.openai.com/account/api-keys). Add `export OPENAI_API_KEY="<your OpenAI api key>"` to your shell script (e.g. `~/.bashrc`).
 
 ## Example
 
@@ -64,6 +64,14 @@ Example: `clevercli refactor < index.ts`
 - **poem**: Asks ChatGPT to write a small poem on the topic.
 
 Example: `clevercli poem "hacker news"`
+
+- **recipe**: Outputs recipe suggestions given a list of available ingredients.
+
+Example: `clevercli recipe "ham, cheese, bread"`
+
+- **summarize**: Outputs a short summary of the text.
+
+Example: `clevercli summarize < README.md`
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 

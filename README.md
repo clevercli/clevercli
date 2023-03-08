@@ -28,7 +28,7 @@ See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 ## Adding a prompt
 
-Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the `PromptConfiguration`` interface.
+Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the `PromptConfiguration` interface.
 
 ```typescript
 export interface PromptConfiguration {

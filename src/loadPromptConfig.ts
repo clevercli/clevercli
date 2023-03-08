@@ -13,9 +13,7 @@ export function sourceRelativePath(
   return pathJoin(__dirname, ...relPaths);
 }
 
-export async function loadFromBaseDir(promptId: string, baseDir: string) {
-  const filename = `${promptId}.mjs`;
-  const path = pathJoin(baseDir, filename);
+export async function loadFromBaseDir(promptId: string, path: string) {
   const promptConfig = await import(path);
   // TODO: validate promptConfig?
   return promptConfig.default;
@@ -24,8 +22,11 @@ export async function loadFromBaseDir(promptId: string, baseDir: string) {
 export async function loadPromptConfig(promptId: string, config: Config) {
   try {
     const promptConfig = await Promise.any([
-      loadFromBaseDir(promptId, sourceRelativePath(import.meta, "./prompts")),
-      loadFromBaseDir(promptId, config.paths.data),
+      loadFromBaseDir(
+        promptId,
+        sourceRelativePath(import.meta, `./prompts/${promptId}.js`)
+      ),
+      loadFromBaseDir(promptId, pathJoin(config.paths.data, `${promptId}.mjs`)),
     ]);
     return promptConfig;
   } catch (err) {

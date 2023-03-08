@@ -12,17 +12,23 @@ npm install -g @clevercli/cli
 clevercli <prompt_type> <prompt>
 ```
 
-See `./src/prompts/` for a list of available prompts.
-
 ## Example
 
 ```console
-clevercli eli5 "why is the sky blue?"
+$ clevercli joke "banana"
+Why did the banana go to the doctor? Because it wasn't peeling well!
 ```
+
+## Built-in prompts
+
+- eli5
+- joke
+
+See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 ## Adding a prompt
 
-Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the PromptConfiguration interface.
+Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the `PromptConfiguration`` interface.
 
 ```typescript
 export interface PromptConfiguration {
@@ -79,4 +85,4 @@ Query results are cached on your filesystem's cache directory.
 ## TODO
 
 - Streaming API.
-- Support older Node.js vesions?
+- Support older Node.js versions?

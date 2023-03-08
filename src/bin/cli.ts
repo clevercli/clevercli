@@ -1,4 +1,7 @@
 #!/usr/bin/env node
 import { cli } from "../index.js";
 
-await cli();
+cli().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

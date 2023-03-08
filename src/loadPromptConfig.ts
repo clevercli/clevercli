@@ -13,25 +13,30 @@ export function sourceRelativePath(
   return pathJoin(__dirname, ...relPaths);
 }
 
-export async function loadFromBaseDir(promptId: string, path: string) {
-  const promptConfig = await import(path);
+export async function loadFromBaseDir(path: string) {
+  const promptConfig = require(path);
   // TODO: validate promptConfig?
-  return promptConfig.default;
+  if (promptConfig.default) {
+    return promptConfig.default;
+  }
+  return promptConfig;
 }
 
 export async function loadPromptConfig(promptId: string, config: Config) {
   try {
     const promptConfig = await Promise.any([
-      loadFromBaseDir(
-        promptId,
-        sourceRelativePath(import.meta, `./prompts/${promptId}.js`)
-      ),
-      loadFromBaseDir(promptId, pathJoin(config.paths.data, `${promptId}.mjs`)),
+      loadFromBaseDir(pathJoin(__dirname, `./prompts/${promptId}.js`)),
+      loadFromBaseDir(pathJoin(config.paths.data, `${promptId}.mjs`)),
+      loadFromBaseDir(pathJoin(config.paths.data, `${promptId}.js`)),
     ]);
     return promptConfig;
   } catch (err) {
-    throw new AppError({
-      message: `Could not find prompt ${promptId}. Are you sure it is a builtin prompt or that ${config.paths.data}/${promptId}.mjs exists?`,
-    });
+    if (err instanceof Error) {
+      throw new AppError({
+        message: `Could not find prompt ${promptId}. Are you sure it is a builtin prompt or that ${config.paths.data}/${promptId}.mjs exists?`,
+        cause: err,
+      });
+    }
+    throw err;
   }
 }

@@ -5,11 +5,11 @@
     "types": [
       "vitest/importMeta"
     ],
-    "target": "es2022",
+    "target": "es2021",
     "lib": [
-      "es2022"
+      "es2021"
     ],
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "esModuleInterop": true,

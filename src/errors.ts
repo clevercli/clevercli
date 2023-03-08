@@ -51,5 +51,24 @@ export class AppError extends Error {
   }
 }
 
-export class ApiError extends AppError {}
+export class ApiError extends AppError {
+  type: string;
+  param: string;
+  code: string;
+  constructor(data: {
+    message: string;
+    type: string;
+    param: string;
+    code: string;
+  }) {
+    super({ message: data.message });
+    this.message = data.message;
+    this.type = data.type;
+    this.param = data.param;
+    this.code = data.code;
+  }
+  toString(): string {
+    return `${this.name}: ${this.message} (type = ${this.type}, param = ${this.param}, code = ${this.code})`;
+  }
+}
 export class ConfigError extends AppError {}

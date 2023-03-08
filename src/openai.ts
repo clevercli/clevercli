@@ -4,6 +4,8 @@ import {
   Configuration,
   OpenAIApi,
 } from "openai";
+import { ApiError } from "./errors.js";
+import { asyncIterableToArray } from "./utils.js";
 
 // https://2ality.com/2018/04/async-iter-nodejs.html#generator-%231%3A-from-chunks-to-lines
 async function* chunksToLines(chunksAsync: AsyncGenerator<string>) {
@@ -46,9 +48,23 @@ export async function* openAIQuery(
       },
     ],
   };
-  const res = await openai.createChatCompletion(opts, {
-    responseType: "stream",
-  });
+  const res = await (async () => {
+    try {
+      return await openai.createChatCompletion(opts, {
+        responseType: "stream",
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        if ("isAxiosError" in err) {
+          /* @ts-ignore */
+          const data = await asyncIterableToArray(err.response.data);
+          const error = JSON.parse(data.toString()).error;
+          throw new ApiError(error);
+        }
+      }
+      throw err;
+    }
+  })();
   /* @ts-ignore */
   const stream = res.data as IncomingMessage;
   for await (const chunk of chunksToLines(stream)) {

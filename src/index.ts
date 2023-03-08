@@ -48,7 +48,7 @@ export async function cli() {
           .join("\n")
       );
       return;
-    } else if (promptId.startsWith("--")) {
+    } else if (promptId && promptId.startsWith("--")) {
       printUsageAndExit();
     }
     const input = getInput(argvInput);

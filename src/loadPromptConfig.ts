@@ -8,7 +8,7 @@ import { readdir } from "node:fs/promises";
 async function readFilesInDirectory(path: string) {
   const files = await readdir(path);
   return files
-    .filter((f) => f.endsWith(".js") || f.endsWith(".mjs") || f.endsWith(".ts"))
+    .filter((f) => f.endsWith(".js") || f.endsWith(".mjs"))
     .map((filename) => pathJoin(path, filename));
 }
 

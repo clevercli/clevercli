@@ -2,9 +2,7 @@
 
 ![deverloper-joke-example](./images/developer-joke.gif)
 
-clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
-
-Requires `export OPENAI_API_KEY="<your OpenAI api key>"` (e.g. in your `~/.bashrc`).
+**clevercli** is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
 ```console
 $ npm install -g @clevercli/cli
@@ -21,6 +19,8 @@ Or using `stdin`:
 ```console
 $ echo "<prompt_input>" | clevercli <prompt_type>
 ```
+
+Requires `export OPENAI_API_KEY="<your OpenAI api key>"` to be set (e.g. in your `~/.bashrc`).
 
 ## Example
 

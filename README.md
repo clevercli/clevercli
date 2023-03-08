@@ -79,6 +79,10 @@ Example: `clevercli recipe "ham, cheese, bread"`
 
 Example: `clevercli summarize < README.md`
 
+- **synonyms**: List synonyms for the input words.
+
+Example: `clevercli synonyms "cat"`
+
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 See [Adding a built-in prompt](#adding-a-built-in-prompt) for adding an official prompt.

@@ -34,7 +34,7 @@ $ echo "what is stdin?" | clevercli eli5
 Tip: since many answers use markdown, you can pipe to [glow](https://github.com/charmbracelet/glow) to get a nicer rendering:
 
 ```console
-clevercli ask "in node.js, how to check if stdin is open?" | glow
+$ clevercli ask "in node.js, how to check if stdin is open?" | glow
 ```
 
 ![glow-example](./images/glow-example.png)

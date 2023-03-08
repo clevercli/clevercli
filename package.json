@@ -15,7 +15,8 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "test": "vitest src/",
-    "dev": "tsx src/bin/cli.ts eli5 'why is the sky blue?'",
+    "cli-test": "tsx src/bin/cli.ts eli5 'why is the sky blue?'",
+    "dev": "tsx src/bin/cli.ts",
     "clean": "npm run build -- --clean",
     "build": "tsc --build",
     "start": "node build/bin/server.js",

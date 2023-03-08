@@ -2,6 +2,8 @@
 
 clevercli is a CLI that queries OpenAI models (e.g. ChatGPT). New prompt types can easily be added and there is a growing list of community maintained prompts.
 
+Requires `export OPENAI_API_KEY="<your OpenAI api key>"` (e.g. in your `~/.bashrc`).
+
 ```console
 $ npm install -g @clevercli/cli
 ```
@@ -9,7 +11,13 @@ $ npm install -g @clevercli/cli
 ## Usage
 
 ```console
-$ clevercli <prompt_type> <prompt>
+$ clevercli <prompt_type> <prompt_input>
+```
+
+Or using `stdin`:
+
+```console
+$ echo "<prompt_input>" | clevercli <prompt_type>
 ```
 
 ## Example
@@ -19,10 +27,35 @@ $ clevercli joke "banana"
 Why did the banana go to the doctor? Because it wasn't peeling well!
 ```
 
+```console
+$ echo "what is stdin?" | clevercli eli5
+```
+
+Tip: since many answers use markdown, you can pipe to [glow](https://github.com/charmbracelet/glow) to get a nicer rendering:
+
+```console
+clevercli ask "in node.js, how to check if stdin is open?" | glow
+```
+
+![glow-example](./images/glow-example.png)
+
 ## Built-in prompts
 
-- eli5: Explain Me Like I'm 5
-- joke: tells a joke about the topic
+- **ask**: Just passes through the input directly to ChatGPT.
+
+Example: `clevercli ask "in node.js, how to check if stdin is open?"`
+
+- **eli5**: Explain Me Like I'm 5.
+
+Example: `clevercli eli5 "why is the sky blue?"`
+
+- **joke**: Tells a joke about the topic.
+
+Example: `clevercli joke "yo mamma"`
+
+- **refactor**: Asks ChatGPT to refactor code in a file.
+
+Example: `clevercli refactor < index.ts`
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 

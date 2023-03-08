@@ -4,6 +4,7 @@ import { loadPromptConfig } from "./loadPromptConfig.js";
 import { APPNAME } from "./types.js";
 import FileSystemKVS from "./kvs/kvs-filesystem.js";
 import { AppError } from "./errors.js";
+import { readFileSync } from "node:fs";
 
 function parseArgs(argv: string[]) {
   const [_nodeBin, _jsFile, promptId, ...rest] = argv;
@@ -20,9 +21,20 @@ function printUsageAndExit() {
   process.exit(1);
 }
 
+function getInput(argvInput: string) {
+  try {
+    const stdinInput = readFileSync(process.stdin.fd, "utf-8");
+    // console.log({ stdinInput });
+    return `${argvInput} ${stdinInput}`;
+  } catch (err) {
+    return argvInput;
+  }
+}
+
 export async function cli() {
   try {
-    const { promptId, input } = parseArgs(process.argv);
+    const { promptId, input: argvInput } = parseArgs(process.argv);
+    const input = getInput(argvInput);
     if (!promptId || !input) {
       printUsageAndExit();
     }

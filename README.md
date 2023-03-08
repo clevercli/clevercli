@@ -61,6 +61,8 @@ Example: `clevercli refactor < index.ts`
 
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 
+See [Adding a built-in prompt](#adding-a-built-in-prompt) for adding an official prompt.
+
 ## Adding a prompt
 
 Create a file `~/.clevercli/<prompt name>.mjs` which returns an object that follows the `PromptConfiguration` interface.
@@ -84,7 +86,7 @@ export default {
 };
 ```
 
-## Adding a builtin prompt
+## Adding a built-in prompt
 
 1. Fork the repository.
 

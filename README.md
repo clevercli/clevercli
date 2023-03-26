@@ -111,6 +111,10 @@ Example: `bash -c $(clevercli unix-command "list all .md files")`
 
 Example `clevercli regex "http://google.com https://news.ycombinator.com/some/path"`
 
+- [jsdoc](./src/prompts/jsdoc.ts): Adds JSDoc comments to exported functions.
+
+Example `clevercli jsdoc < index.js`
+
 See [./src/prompts/](./src/prompts) for the list of available prompts.
 
 See [Adding a built-in prompt](#adding-a-built-in-prompt) for adding an official prompt.
